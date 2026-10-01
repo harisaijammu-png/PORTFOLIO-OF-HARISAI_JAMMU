@@ -189,7 +189,7 @@ function App() {
       
       {activeIndex === sections.length - 1 && (
         <div className="fixed bottom-4 left-0 w-full text-center text-gray-500 text-xs z-50 animate-pulse">
-          <p>&copy; {new Date().getFullYear()} JAMMU HARISAI. Built with React & Framer Motion.</p>
+          <p>&copy; {new Date().getFullYear()} JAMMU HARISAI. Built with Next.js & Framer Motion.</p>
         </div>
       )}
     </div>
