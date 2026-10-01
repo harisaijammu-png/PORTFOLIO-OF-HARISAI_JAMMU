@@ -4,15 +4,15 @@ import { ExternalLink, Code2 } from 'lucide-react';
 
 const projects = [
   {
-    title: "Airlines Reservation System",
+    title: "SMART HOSPITAL OP & QUEUE MANAGEMENT SYSTEM",
     role: "Full Stack Developer",
     points: [
-      "Developed a flight booking web application using Java Servlets and JSP, following an MVC architecture to separate business logic, data access, and presentation layers.",
-      "Solved concurrent-booking conflicts by wrapping seat allocation in database transactions with row-level locking, guaranteeing zero double-bookings under simultaneous requests.",
-      "Built REST API layer, payment gateway integration, email confirmations, and migration to Spring Boot."
+      "Architected a real-time management platform featuring customized, secure dashboards for staff, doctors, and patients.",
+      "Engineered a live tracking system to estimate patient wait times, conducting rigorous scenario testing to handle concurrency and unexpected operational delays.",
+      "Authored comprehensive technical documentation and system rules to enforce data privacy, ensure system reliability, and maintain clear API/database interactions."
     ],
-    tech: ["Java", "JSP", "Servlets", "Spring Boot", "REST API", "SQL"],
-    link: "#",
+    tech: ["MySQL", "Real-Time Sync", "Web Architecture"],
+    link: "https://smart-hospital-management-cp9n.onrender.com",
     github: "#"
   }
 ];
@@ -69,11 +69,8 @@ const ProjectsSection = () => {
                   </div>
                 </div>
                 
-                <div className="flex md:flex-col gap-4 justify-start md:justify-center items-center md:items-end">
-                  <a href={project.github} className="p-3 rounded-full bg-[var(--color-brand)] text-slate-950 transition-all duration-300 hover:brightness-110 shadow-md shadow-black/20" aria-label="Code">
-                    <Code2 className="w-6 h-6" />
-                  </a>
-                  <a href={project.link} className="p-3 rounded-full bg-[var(--color-brand)] text-slate-950 transition-all duration-300 hover:brightness-110 shadow-md shadow-black/20" aria-label="External Link">
+                <div className="flex md:flex-col gap-4 justify-end items-end h-full pt-4 md:pt-0">
+                  <a href={project.link} className="p-3 rounded-full bg-[var(--color-brand)] text-slate-950 transition-all duration-300 hover:brightness-110 shadow-md shadow-black/20 md:mt-auto" aria-label="External Link">
                     <ExternalLink className="w-6 h-6" />
                   </a>
                 </div>

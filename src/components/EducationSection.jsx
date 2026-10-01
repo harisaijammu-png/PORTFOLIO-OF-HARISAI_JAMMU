@@ -3,16 +3,19 @@ import { motion } from 'framer-motion';
 
 const educationData = [
   {
-    degree: "Master's in Applied Computer Science",
-    institution: "Northwest Missouri State University",
-    duration: "DEC 2024",
-    grade: "3.5"
+    degree: "B.Tech in Computer Science and Engineering",
+    institution: "Rise Krishna Sai Prakasam Group of Institutions",
+    duration: "2023 - 2027"
   },
   {
-    degree: "Bachelor of Technology in Computer Science",
-    institution: "Karunya Institute of Technology & Science",
-    duration: "MAY 2022",
-    grade: "7.0"
+    degree: "Intermediate (MPC)",
+    institution: "Br. Oxford Junior College, Kandukur",
+    duration: "2021 - 2023"
+  },
+  {
+    degree: "10th Standard (SSC)",
+    institution: "Sri Vidyaniketan English Medium High School",
+    duration: "2020 - 2021"
   }
 ];
 
@@ -45,16 +48,15 @@ const EducationSection = () => {
               <div className="absolute left-0 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-[var(--color-card-border)] to-transparent md:hidden"></div>
               
               {educationData.map((edu, idx) => (
-                <div key={idx} className="flex flex-col md:flex-row md:items-center gap-4 relative">
+                <div key={idx} className="flex flex-col gap-1.5 relative border-b border-slate-800/50 pb-6 last:border-0 last:pb-0">
                   {/* Timeline dot for mobile */}
                   <div className="absolute -left-5 top-2.5 w-2 h-2 rounded-full bg-[var(--color-brand)] md:hidden"></div>
                   
-                  <div className="flex-shrink-0 px-3 py-1.5 text-xs font-bold tracking-widest bg-slate-800 text-slate-300 border border-slate-700 rounded-full w-fit">
-                    [{edu.duration}]
+                  <div className="text-slate-100 font-bold text-lg md:text-xl leading-tight">
+                    {edu.degree} <span className="text-[var(--color-brand)] font-medium text-base md:text-lg mx-1.5">|</span> <span className="text-slate-300 font-medium text-base md:text-lg whitespace-nowrap">{edu.duration}</span>
                   </div>
-                  <div className="h-px w-8 bg-white/10 hidden md:block"></div>
-                  <div className="text-slate-400 font-light text-base md:text-lg leading-relaxed">
-                    <strong className="text-slate-100 font-medium">{edu.degree}</strong> <span className="hidden md:inline text-gray-500">—</span><br className="md:hidden" /> {edu.institution} <span className="text-[var(--color-brand)] text-sm ml-2 font-bold">(GPA: {edu.grade})</span>
+                  <div className="text-slate-400 font-light text-base md:text-lg">
+                    {edu.institution}
                   </div>
                 </div>
               ))}

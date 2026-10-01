@@ -31,23 +31,14 @@ const AboutSection = () => {
 
             <div className="space-y-6 text-lg md:text-xl text-slate-400 leading-relaxed font-light">
               <p>
-                I'm a Java Full Stack Developer with <strong className="text-[var(--color-brand)] font-bold">3+ years</strong> of hands-on experience delivering enterprise-scale, cloud-ready applications using <span className="text-[var(--color-brand)] font-medium">Java</span>, <span className="text-[var(--color-brand)] font-medium">Spring Boot</span>, and <span className="text-[var(--color-brand)] font-medium">Angular</span>.
+                I'm <strong className="text-white font-medium">Jammu Harisai</strong>, a final-year Computer Science student and full-stack developer dedicated to designing clean, high-performance web applications.
               </p>
               <p>
-                Proven expertise in designing RESTful microservices, building high-performance SPAs, and implementing secure, scalable backend systems.
+                My expertise lies in building scalable modern architectures, real-time management systems, and structured relational databases using <span className="text-[var(--color-brand)] font-medium">Next.js</span>, <span className="text-[var(--color-brand)] font-medium">React</span>, <span className="text-[var(--color-brand)] font-medium">Node.js</span>, and <span className="text-[var(--color-brand)] font-medium">PostgreSQL</span>.
               </p>
               <p>
-                Strong background in Agile delivery, CI/CD automation, and collaborating across product, QA, and DevOps teams in regulated and enterprise environments.
+                Whether I'm designing live tracking features or optimizing backend data pipelines, my focus is always on writing reliable, production-ready code and delivering seamless user experiences.
               </p>
-            </div>
-            
-            {/* Key Tags */}
-            <div className="mt-10 flex flex-wrap gap-3">
-              {['FULL STACK', 'CLOUD NATIVE', 'CI/CD AUTOMATION', 'MICROSERVICES', 'PROBLEM SOLVING'].map((tag, idx) => (
-                <span key={idx} className="px-3 py-1 text-xs font-bold tracking-widest border border-slate-700 bg-slate-800 rounded-full text-slate-300 hover:bg-slate-700 hover:text-white transition-colors duration-300">
-                  {tag}
-                </span>
-              ))}
             </div>
           </div>
         </motion.div>
