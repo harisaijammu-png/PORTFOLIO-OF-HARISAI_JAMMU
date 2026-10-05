@@ -74,9 +74,9 @@ const HeroSection = () => {
 
           <motion.div variants={itemVariants} className="flex flex-col items-start w-full">
             <h2 className="text-xl md:text-2xl text-gray-300 font-medium mb-1">Hi, I'm</h2>
-            <h1 className="text-[10vw] sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.5rem] font-black tracking-tighter leading-[1.05] uppercase drop-shadow-xl whitespace-nowrap">
+            <h1 className="text-[6.5vw] sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.5rem] font-black tracking-tighter leading-[1.05] uppercase drop-shadow-xl whitespace-nowrap">
               <span className="text-[var(--color-brand)]">HARISAI</span>
-              <span className="text-white ml-3 md:ml-4">JAMMU</span>
+              <span className="text-white ml-2 md:ml-4">JAMMU</span>
             </h1>
           </motion.div>
 
@@ -91,9 +91,9 @@ const HeroSection = () => {
                   e.stopPropagation();
                   window.dispatchEvent(new CustomEvent('navigateToSection', { detail: 4 }));
                 }}
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group"
+                className="inline-flex items-center justify-center space-x-2 px-6 py-4 sm:px-8 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group w-full sm:w-auto"
               >
-                <span className="relative z-10 flex items-center tracking-widest text-sm uppercase">
+                <span className="relative z-10 flex items-center tracking-widest text-xs sm:text-sm uppercase">
                   VIEW ACADEMIC PROJECT <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -102,9 +102,9 @@ const HeroSection = () => {
                 href="/harisaijammu.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group"
+                className="inline-flex items-center justify-center space-x-2 px-6 py-4 sm:px-8 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group w-full sm:w-auto"
               >
-                <span className="relative z-10 flex items-center tracking-widest text-sm uppercase">
+                <span className="relative z-10 flex items-center tracking-widest text-xs sm:text-sm uppercase">
                   VIEW RESUME <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>

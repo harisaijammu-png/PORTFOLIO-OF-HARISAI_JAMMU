@@ -53,7 +53,7 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
       variants={variants}
       initial="future"
       animate={state}
-      className="absolute inset-0 w-full h-full transform-gpu"
+      className="absolute inset-0 w-full h-full transform-gpu overflow-y-auto hide-scrollbar"
       style={{ transformStyle: 'preserve-3d', transformOrigin: 'center center' }}
     >
       <motion.div 
@@ -62,7 +62,9 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
         animate={{ opacity: isActive ? 0 : 1 }}
         transition={{ duration: 0.8 }}
       />
-      {children}
+      <div className="min-h-full pb-20">
+        {children}
+      </div>
     </motion.div>
   );
 };
@@ -70,6 +72,14 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isScrolling = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleNext = useCallback(() => {
     if (activeIndex < sections.length - 1) {
@@ -84,6 +94,7 @@ function App() {
   }, [activeIndex]);
 
   useEffect(() => {
+    if (isMobile) return;
     const handleWheel = (e) => {
       e.preventDefault();
       if (isScrolling.current) return;
@@ -104,9 +115,10 @@ function App() {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, isMobile]);
 
   useEffect(() => {
+    if (isMobile) return;
     const handleKeyDown = (e) => {
       if (isScrolling.current) return;
 
@@ -123,20 +135,28 @@ function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, isMobile]);
 
   useEffect(() => {
     const handleNavigate = (e) => {
       const targetIndex = e.detail;
       if (typeof targetIndex === 'number' && targetIndex >= 0 && targetIndex < sections.length) {
-        setActiveIndex(targetIndex);
+        if (!isMobile) {
+          setActiveIndex(targetIndex);
+        } else {
+          const el = document.getElementById(sections[targetIndex].id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
       }
     };
     window.addEventListener('navigateToSection', handleNavigate);
     return () => window.removeEventListener('navigateToSection', handleNavigate);
-  }, []);
+  }, [isMobile]);
 
   const handleDragEnd = (event, info) => {
+    if (isMobile) return;
     const threshold = 50;
     if (info.offset.y < -threshold) {
       handleNext();
@@ -144,6 +164,36 @@ function App() {
       handlePrev();
     }
   };
+
+  if (isMobile) {
+    return (
+      <div className="bg-[var(--color-bg-deep)] text-white font-sans selection:bg-[var(--color-brand)]/30 selection:text-white min-h-screen">
+        <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 px-2 py-2 rounded-full bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/5 shadow-2xl overflow-x-auto max-w-[95vw] hide-scrollbar">
+          {sections.map((section, idx) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              className="relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-colors duration-300 text-gray-400 hover:text-white whitespace-nowrap"
+            >
+              {section.label}
+            </a>
+          ))}
+        </nav>
+
+        <main className="flex flex-col w-full">
+          {sections.map((section) => (
+            <div key={section.id} id={section.id} className="w-full relative">
+              {section.component}
+            </div>
+          ))}
+        </main>
+        
+        <div className="w-full text-center text-gray-500 text-xs py-8">
+          <p>&copy; {new Date().getFullYear()} JAMMU HARISAI. Built with Next.js & Framer Motion.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-[var(--color-bg-deep)] text-white font-sans selection:bg-[var(--color-brand)]/30 selection:text-white overflow-hidden">
