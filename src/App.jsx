@@ -158,13 +158,13 @@ function App() {
   return (
     <div className="fixed inset-0 bg-[var(--color-bg-deep)] text-white font-sans selection:bg-[var(--color-brand)]/30 selection:text-white overflow-hidden">
       
-      {/* Desktop Navigation */}
-      <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 px-2 py-2 rounded-full bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 shadow-2xl overflow-x-auto max-w-[95vw] hide-scrollbar">
+      {/* Universal Navigation */}
+      <nav className="flex fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 px-2 py-2 rounded-full bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 shadow-2xl overflow-x-auto max-w-[95vw] hide-scrollbar">
         {sections.map((section, idx) => (
           <button
             key={section.id}
             onClick={() => setActiveIndex(idx)}
-            className={`relative px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-colors duration-300 ${
+            className={`relative shrink-0 px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-medium tracking-wide transition-colors duration-300 ${
               activeIndex === idx 
                 ? 'text-[var(--color-brand)]' 
                 : 'text-gray-400 hover:text-white'
@@ -182,40 +182,6 @@ function App() {
           </button>
         ))}
       </nav>
-
-      {/* Mobile Navigation */}
-      <div className="md:hidden fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5">
-        <span className="text-[var(--color-brand)] font-bold tracking-widest uppercase text-sm">HARISAI JAMMU</span>
-        <button 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-white p-2 focus:outline-none"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {isMobileMenuOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden fixed inset-0 z-40 bg-[#0a0a0a] pt-24 px-6 flex flex-col gap-6"
-        >
-          {sections.map((section, idx) => (
-            <button
-              key={section.id}
-              onClick={() => {
-                setActiveIndex(idx);
-                setIsMobileMenuOpen(false);
-              }}
-              className={`text-2xl font-bold text-left transition-colors ${
-                activeIndex === idx ? 'text-[var(--color-brand)]' : 'text-gray-400'
-              }`}
-            >
-              {section.label}
-            </button>
-          ))}
-        </motion.div>
-      )}
 
       <motion.main 
         className="relative w-full h-full" 
