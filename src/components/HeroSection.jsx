@@ -59,24 +59,23 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0 opacity-30">
         <ParticleBackground />
       </div>
-
-      <div className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 xl:gap-24 items-center">
+      <div className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-16 relative z-10 flex flex-col lg:grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 xl:gap-24 items-center mt-20 lg:mt-0 pb-10 lg:pb-0">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-start space-y-6 max-w-xl xl:max-w-2xl"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left space-y-6 max-w-xl xl:max-w-2xl w-full"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/10 backdrop-blur-sm mb-2">
+          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/10 backdrop-blur-sm mb-2 mx-auto lg:mx-0">
             <span className="w-2 h-2 rounded-full bg-[var(--color-brand)] animate-pulse"></span>
             <span className="text-xs font-bold tracking-wider text-[var(--color-brand)] uppercase">OPEN TO WORK</span>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="flex flex-col items-start w-full">
+          <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start w-full">
             <h2 className="text-xl md:text-2xl text-gray-300 font-medium mb-1">Hi, I'm</h2>
-            <h1 className="text-[6.5vw] sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.5rem] font-black tracking-tighter leading-[1.05] uppercase drop-shadow-xl whitespace-nowrap">
+            <h1 className="text-[10vw] sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.5rem] font-black tracking-tighter leading-[1.05] uppercase drop-shadow-xl whitespace-nowrap">
               <span className="text-[var(--color-brand)]">HARISAI</span>
-              <span className="text-white ml-2 md:ml-4">JAMMU</span>
+              <span className="text-white ml-3 md:ml-4">JAMMU</span>
             </h1>
           </motion.div>
 
@@ -84,16 +83,16 @@ const HeroSection = () => {
             <Typewriter text="4TH YEAR COMPUTER SCIENCE STUDENT • FULL STACK DEVELOPER" delay={1} />
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mt-6 flex flex-col gap-4">
-            <div className="flex flex-col sm:flex-row gap-4">
+          <motion.div variants={itemVariants} className="mt-6 flex flex-col items-center lg:items-start gap-4 w-full">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   window.dispatchEvent(new CustomEvent('navigateToSection', { detail: 4 }));
                 }}
-                className="inline-flex items-center justify-center space-x-2 px-6 py-4 sm:px-8 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group w-full sm:w-auto"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group"
               >
-                <span className="relative z-10 flex items-center tracking-widest text-xs sm:text-sm uppercase">
+                <span className="relative z-10 flex items-center tracking-widest text-sm uppercase">
                   VIEW ACADEMIC PROJECT <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -102,20 +101,20 @@ const HeroSection = () => {
                 href="/harisaijammu.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 px-6 py-4 sm:px-8 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group w-full sm:w-auto"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-[var(--color-brand)] text-slate-950 font-bold hover:brightness-110 transition-colors shadow-lg shadow-black/20 group"
               >
-                <span className="relative z-10 flex items-center tracking-widest text-xs sm:text-sm uppercase">
+                <span className="relative z-10 flex items-center tracking-widest text-sm uppercase">
                   VIEW RESUME <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">
               <a 
                 href="https://www.linkedin.com/in/harisai-jammu-6bbab1366?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-slate-800/50 border border-slate-700 text-slate-200 font-bold hover:bg-slate-700 hover:text-white transition-colors shadow-lg shadow-black/20 group w-full sm:w-auto"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-slate-800/50 border border-slate-700 text-slate-200 font-bold hover:bg-slate-700 hover:text-white transition-colors shadow-lg shadow-black/20 group"
               >
                 <span className="relative z-10 flex items-center tracking-widest text-sm">
                   <svg className="mr-2 w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +127,7 @@ const HeroSection = () => {
                 href="https://github.com/harisaijammu-png"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-slate-800/50 border border-slate-700 text-slate-200 font-bold hover:bg-slate-700 hover:text-white transition-colors shadow-lg shadow-black/20 group w-full sm:w-auto"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-slate-800/50 border border-slate-700 text-slate-200 font-bold hover:bg-slate-700 hover:text-white transition-colors shadow-lg shadow-black/20 group"
               >
                 <span className="relative z-10 flex items-center tracking-widest text-sm">
                   <svg className="mr-2 w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

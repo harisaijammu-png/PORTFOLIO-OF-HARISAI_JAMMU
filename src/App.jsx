@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import SkillsSection from './components/SkillsSection';
 import EducationSection from './components/EducationSection';
 import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
+import Chatbot from './components/Chatbot';
 
 const sections = [
   { id: 'hero', label: 'Home', component: <HeroSection /> },
@@ -53,7 +55,7 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
       variants={variants}
       initial="future"
       animate={state}
-      className="absolute inset-0 w-full h-full transform-gpu overflow-y-auto hide-scrollbar"
+      className="absolute inset-0 w-full h-full transform-gpu"
       style={{ transformStyle: 'preserve-3d', transformOrigin: 'center center' }}
     >
       <motion.div 
@@ -62,24 +64,15 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
         animate={{ opacity: isActive ? 0 : 1 }}
         transition={{ duration: 0.8 }}
       />
-      <div className="min-h-full pb-20">
-        {children}
-      </div>
+      {children}
     </motion.div>
   );
 };
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isScrolling = useRef(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handleNext = useCallback(() => {
     if (activeIndex < sections.length - 1) {
@@ -94,7 +87,6 @@ function App() {
   }, [activeIndex]);
 
   useEffect(() => {
-    if (isMobile) return;
     const handleWheel = (e) => {
       e.preventDefault();
       if (isScrolling.current) return;
@@ -115,10 +107,9 @@ function App() {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [handleNext, handlePrev, isMobile]);
+  }, [handleNext, handlePrev]);
 
   useEffect(() => {
-    if (isMobile) return;
     const handleKeyDown = (e) => {
       if (isScrolling.current) return;
 
@@ -135,28 +126,20 @@ function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev, isMobile]);
+  }, [handleNext, handlePrev]);
 
   useEffect(() => {
     const handleNavigate = (e) => {
       const targetIndex = e.detail;
       if (typeof targetIndex === 'number' && targetIndex >= 0 && targetIndex < sections.length) {
-        if (!isMobile) {
-          setActiveIndex(targetIndex);
-        } else {
-          const el = document.getElementById(sections[targetIndex].id);
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
+        setActiveIndex(targetIndex);
       }
     };
     window.addEventListener('navigateToSection', handleNavigate);
     return () => window.removeEventListener('navigateToSection', handleNavigate);
-  }, [isMobile]);
+  }, []);
 
   const handleDragEnd = (event, info) => {
-    if (isMobile) return;
     const threshold = 50;
     if (info.offset.y < -threshold) {
       handleNext();
@@ -165,40 +148,11 @@ function App() {
     }
   };
 
-  if (isMobile) {
-    return (
-      <div className="bg-[var(--color-bg-deep)] text-white font-sans selection:bg-[var(--color-brand)]/30 selection:text-white min-h-screen">
-        <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 px-2 py-2 rounded-full bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/5 shadow-2xl overflow-x-auto max-w-[95vw] hide-scrollbar">
-          {sections.map((section, idx) => (
-            <a
-              key={section.id}
-              href={`#${section.id}`}
-              className="relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-colors duration-300 text-gray-400 hover:text-white whitespace-nowrap"
-            >
-              {section.label}
-            </a>
-          ))}
-        </nav>
-
-        <main className="flex flex-col w-full">
-          {sections.map((section) => (
-            <div key={section.id} id={section.id} className="w-full relative">
-              {section.component}
-            </div>
-          ))}
-        </main>
-        
-        <div className="w-full text-center text-gray-500 text-xs py-8">
-          <p>&copy; {new Date().getFullYear()} JAMMU HARISAI. Built with Next.js & Framer Motion.</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="fixed inset-0 bg-[var(--color-bg-deep)] text-white font-sans selection:bg-[var(--color-brand)]/30 selection:text-white overflow-hidden">
       
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 px-2 py-2 rounded-full bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 shadow-2xl overflow-x-auto max-w-[95vw] hide-scrollbar">
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 px-2 py-2 rounded-full bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 shadow-2xl overflow-x-auto max-w-[95vw] hide-scrollbar">
         {sections.map((section, idx) => (
           <button
             key={section.id}
@@ -222,6 +176,40 @@ function App() {
         ))}
       </nav>
 
+      {/* Mobile Navigation */}
+      <div className="md:hidden fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5">
+        <span className="text-[var(--color-brand)] font-bold tracking-widest uppercase text-sm">HARISAI</span>
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="text-white p-2 focus:outline-none"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {isMobileMenuOpen && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden fixed inset-0 z-40 bg-[#0a0a0a] pt-24 px-6 flex flex-col gap-6"
+        >
+          {sections.map((section, idx) => (
+            <button
+              key={section.id}
+              onClick={() => {
+                setActiveIndex(idx);
+                setIsMobileMenuOpen(false);
+              }}
+              className={`text-2xl font-bold text-left transition-colors ${
+                activeIndex === idx ? 'text-[var(--color-brand)]' : 'text-gray-400'
+              }`}
+            >
+              {section.label}
+            </button>
+          ))}
+        </motion.div>
+      )}
+
       <motion.main 
         className="relative w-full h-full" 
         style={{ perspective: "1000px" }}
@@ -242,6 +230,8 @@ function App() {
           <p>&copy; {new Date().getFullYear()} JAMMU HARISAI. Built with Next.js & Framer Motion.</p>
         </div>
       )}
+
+      <Chatbot />
     </div>
   );
 }
