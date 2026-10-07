@@ -55,7 +55,7 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
       variants={variants}
       initial="future"
       animate={state}
-      className="absolute inset-0 w-full h-full transform-gpu"
+      className={`absolute inset-0 w-full h-full transform-gpu overflow-x-hidden ${isActive ? 'overflow-y-auto' : 'overflow-y-hidden'} hide-scrollbar`}
       style={{ transformStyle: 'preserve-3d', transformOrigin: 'center center' }}
     >
       <motion.div 
@@ -73,6 +73,13 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isScrolling = useRef(false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleNext = useCallback(() => {
     if (activeIndex < sections.length - 1) {
@@ -213,10 +220,10 @@ function App() {
       <motion.main 
         className="relative w-full h-full" 
         style={{ perspective: "1000px" }}
-        drag="y"
+        drag={isMobile ? false : "y"}
         dragConstraints={{ top: 0, bottom: 0 }}
         dragElastic={0.1}
-        onDragEnd={handleDragEnd}
+        onDragEnd={isMobile ? undefined : handleDragEnd}
       >
         {sections.map((section, idx) => (
           <Card3DWrapper key={section.id} index={idx} activeIndex={activeIndex}>
