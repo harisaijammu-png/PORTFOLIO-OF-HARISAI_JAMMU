@@ -64,14 +64,14 @@ const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-center text-center lg:items-start lg:text-left space-y-6 max-w-xl xl:max-w-2xl w-full"
+          className="flex flex-col items-start text-left space-y-6 max-w-xl xl:max-w-2xl w-full"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/10 backdrop-blur-sm mb-2 mx-auto lg:mx-0">
+          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/10 backdrop-blur-sm mb-2">
             <span className="w-2 h-2 rounded-full bg-[var(--color-brand)] animate-pulse"></span>
             <span className="text-xs font-bold tracking-wider text-[var(--color-brand)] uppercase">OPEN TO WORK</span>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start w-full">
+          <motion.div variants={itemVariants} className="flex flex-col items-start w-full">
             <h2 className="text-xl md:text-2xl text-gray-300 font-medium mb-1">Hi, I'm</h2>
             <h1 className="text-[10vw] sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.5rem] font-black tracking-tighter leading-[1.05] uppercase drop-shadow-xl whitespace-nowrap">
               <span className="text-[var(--color-brand)]">HARISAI</span>
@@ -83,7 +83,7 @@ const HeroSection = () => {
             <Typewriter text="4TH YEAR COMPUTER SCIENCE STUDENT • FULL STACK DEVELOPER" delay={1} />
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mt-6 flex flex-col items-center lg:items-start gap-4 w-full">
+          <motion.div variants={itemVariants} className="mt-6 flex flex-col items-start gap-4 w-full">
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button 
                 onClick={(e) => {

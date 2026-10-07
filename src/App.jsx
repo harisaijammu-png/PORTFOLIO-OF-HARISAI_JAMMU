@@ -178,7 +178,7 @@ function App() {
 
       {/* Mobile Navigation */}
       <div className="md:hidden fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5">
-        <span className="text-[var(--color-brand)] font-bold tracking-widest uppercase text-sm">HARISAI</span>
+        <span className="text-[var(--color-brand)] font-bold tracking-widest uppercase text-sm">HARISAI JAMMU</span>
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="text-white p-2 focus:outline-none"

@@ -52,8 +52,10 @@ const EducationSection = () => {
                   {/* Timeline dot for mobile */}
                   <div className="absolute -left-5 top-2.5 w-2 h-2 rounded-full bg-[var(--color-brand)] md:hidden"></div>
                   
-                  <div className="text-slate-100 font-bold text-lg md:text-xl leading-tight">
-                    {edu.degree} <span className="text-[var(--color-brand)] font-medium text-base md:text-lg mx-1.5">|</span> <span className="text-slate-300 font-medium text-base md:text-lg whitespace-nowrap">{edu.duration}</span>
+                  <div className="flex flex-col md:flex-row md:items-center text-slate-100 font-bold text-lg md:text-xl leading-tight">
+                    <span>{edu.degree}</span>
+                    <span className="hidden md:inline text-[var(--color-brand)] font-medium text-base md:text-lg mx-2">|</span>
+                    <span className="text-slate-300 font-medium text-base md:text-lg mt-1 md:mt-0">{edu.duration}</span>
                   </div>
                   <div className="text-slate-400 font-light text-base md:text-lg">
                     {edu.institution}
