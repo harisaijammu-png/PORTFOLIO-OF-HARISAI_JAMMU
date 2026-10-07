@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import SkillsSection from './components/SkillsSection';
@@ -24,21 +24,21 @@ const Card3DWrapper = ({ index, activeIndex, children }) => {
   
   const variants = {
     active: {
-      y: "0%",
+      x: "0%",
       opacity: 1,
       zIndex: 10,
       pointerEvents: "auto",
       transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] }
     },
     past: {
-      y: "-50%",
+      x: "-50%",
       opacity: 0,
       zIndex: 0,
       pointerEvents: "none",
       transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] }
     },
     future: {
-      y: "50%",
+      x: "50%",
       opacity: 0,
       zIndex: 20,
       pointerEvents: "none",
@@ -120,11 +120,11 @@ function App() {
     const handleKeyDown = (e) => {
       if (isScrolling.current) return;
 
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowRight') {
         isScrolling.current = true;
         handleNext();
         setTimeout(() => isScrolling.current = false, 1000);
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'ArrowLeft') {
         isScrolling.current = true;
         handlePrev();
         setTimeout(() => isScrolling.current = false, 1000);
@@ -148,9 +148,9 @@ function App() {
 
   const handleDragEnd = (event, info) => {
     const threshold = 50;
-    if (info.offset.y < -threshold) {
+    if (info.offset.x < -threshold) {
       handleNext();
-    } else if (info.offset.y > threshold) {
+    } else if (info.offset.x > threshold) {
       handlePrev();
     }
   };
@@ -186,8 +186,8 @@ function App() {
       <motion.main 
         className="relative w-full h-full" 
         style={{ perspective: "1000px" }}
-        drag={isMobile ? false : "y"}
-        dragConstraints={{ top: 0, bottom: 0 }}
+        drag={isMobile ? false : "x"}
+        dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.1}
         onDragEnd={isMobile ? undefined : handleDragEnd}
       >
@@ -198,6 +198,25 @@ function App() {
         ))}
       </motion.main>
       
+      {/* Navigation Arrows */}
+      <button 
+        onClick={handlePrev}
+        disabled={activeIndex === 0}
+        className="fixed left-2 md:left-6 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/10 text-gray-300 hover:text-[var(--color-brand)] hover:border-[var(--color-brand)]/50 transition-all disabled:opacity-0 disabled:pointer-events-none"
+        aria-label="Previous Slide"
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      <button 
+        onClick={handleNext}
+        disabled={activeIndex === sections.length - 1}
+        className="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/10 text-gray-300 hover:text-[var(--color-brand)] hover:border-[var(--color-brand)]/50 transition-all disabled:opacity-0 disabled:pointer-events-none"
+        aria-label="Next Slide"
+      >
+        <ChevronRight size={24} />
+      </button>
+
       <Chatbot />
     </div>
   );
